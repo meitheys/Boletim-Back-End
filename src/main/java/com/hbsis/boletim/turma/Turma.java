@@ -1,8 +1,10 @@
 package com.hbsis.boletim.turma;
 
 import com.hbsis.boletim.escola.Escola;
+import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurma;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "turmas")
@@ -18,6 +20,8 @@ public class Turma {
     private String numeroTurma;
     @Column(name = "periodo")
     private String periodo;
+    @OneToMany(mappedBy = "idTurma")
+    private List<AlunoTurma> alunoTurmaListB;
 
     public long getId() {
         return id;
@@ -51,6 +55,14 @@ public class Turma {
         this.escola = escola;
     }
 
+    public List<AlunoTurma> getAlunoTurmaListB() {
+        return alunoTurmaListB;
+    }
+
+    public void setAlunoTurmaListB(List<AlunoTurma> alunoTurmaListB) {
+        this.alunoTurmaListB = alunoTurmaListB;
+    }
+
     @Override
     public String toString() {
         return "Turma{" +
@@ -58,6 +70,7 @@ public class Turma {
                 ", escola=" + escola +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
+                ", alunoTurmaListB=" + alunoTurmaListB +
                 '}';
     }
 }

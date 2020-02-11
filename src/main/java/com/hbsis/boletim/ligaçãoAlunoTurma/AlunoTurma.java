@@ -12,8 +12,10 @@ public class AlunoTurma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
+    @ManyToOne
     @JoinColumn(name = "id_aluno", referencedColumnName = "id")
     private Aluno idAluno;
+    @ManyToOne
     @JoinColumn(name = "id_turma", referencedColumnName = "numero_turma")
     private Turma idTurma;
 

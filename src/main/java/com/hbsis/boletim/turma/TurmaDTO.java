@@ -1,26 +1,37 @@
 package com.hbsis.boletim.turma;
 
+import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurma;
+import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurmaDTO;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TurmaDTO {
     private long id;
     private long escola;
     private String numeroTurma;
     private String periodo;
+    private List<AlunoTurmaDTO> alunoTurmaListB;
 
     public TurmaDTO(){}
 
-    public TurmaDTO(long id, long escola, String numeroTurma, String periodo) {
+    public TurmaDTO(long id, long escola, String numeroTurma, String periodo, List<AlunoTurmaDTO> alunoTurmaListB) {
         this.id = id;
         this.escola = escola;
         this.numeroTurma = numeroTurma;
         this.periodo = periodo;
+        this.alunoTurmaListB = alunoTurmaListB;
     }
 
     public static TurmaDTO of(Turma turma) {
+        List<AlunoTurmaDTO> alunoTurmaListB = new ArrayList<>();
+        turma.getAlunoTurmaListB().forEach(alunoTurma -> alunoTurmaListB.add(AlunoTurmaDTO.of(alunoTurma)));
         return new TurmaDTO(
                 turma.getId(),
                 turma.getEscola().getId(),
                 turma.getNumeroTurma(),
-                turma.getPeriodo()
+                turma.getPeriodo(),
+                alunoTurmaListB
         );
     }
 
@@ -56,6 +67,14 @@ public class TurmaDTO {
         this.escola = escola;
     }
 
+    public List<AlunoTurmaDTO> getAlunoTurmaListB() {
+        return alunoTurmaListB;
+    }
+
+    public void setAlunoTurmaListB(List<AlunoTurmaDTO> alunoTurmaListB) {
+        this.alunoTurmaListB = alunoTurmaListB;
+    }
+
     @Override
     public String toString() {
         return "TurmaDTO{" +
@@ -63,6 +82,7 @@ public class TurmaDTO {
                 ", escola=" + escola +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
+                ", alunoTurmaListB=" + alunoTurmaListB +
                 '}';
     }
 }

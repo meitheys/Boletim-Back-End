@@ -1,26 +1,34 @@
 package com.hbsis.boletim.aluno;
 
+import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurma;
+import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurmaDTO;
+import com.hbsis.boletim.turma.TurmaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class AlunoService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AlunoService.class);
     private AlunoRepository alunoRepository;
+    private TurmaService turmaService;
 
-    public AlunoService(AlunoRepository alunoRepository) {
+    public AlunoService(AlunoRepository alunoRepository, TurmaService turmaService) {
         this.alunoRepository = alunoRepository;
+        this.turmaService = turmaService;
     }
 
     public AlunoDTO save(AlunoDTO alunoDTO) throws IOException {
         this.validate(alunoDTO);
         LOGGER.info("Salvando aluno");
         LOGGER.debug("Aluno {}", alunoDTO);
+        List<AlunoTurma> alunoTurmaDTOList = new ArrayList<>();
 
         Aluno aluno = new Aluno();
         aluno.setNomeAluno(alunoDTO.getNomeAluno());
@@ -28,6 +36,12 @@ public class AlunoService {
         aluno.setTelefone(alunoDTO.getTelefone());
         aluno = this.alunoRepository.save(aluno);
 
+        for (AlunoTurmaDTO alunoTurmaDTO : alunoDTO.getAlunoTurmaDTOList()){
+            AlunoTurma alunoTurma = new AlunoTurma();
+            alunoTurma.setIdAluno(aluno);
+            alunoTurma.setIdTurma(turmaService.findByCodigoNumeroTurma(alunoTurmaDTO.getIdTurma()));
+            alunoTurmaDTOList.add(alunoTurma);
+        }
         return alunoDTO.of(aluno);
     }
 
