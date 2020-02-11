@@ -24,7 +24,6 @@ public class TurmaService {
         LOGGER.debug("Turma {}", turmaDTO);
 
         Turma turma = new Turma();
-        turma.setAlunos(turmaDTO.getAlunos());
         turma.setNumeroTurma(turmaDTO.getNumeroTurma());
         turma.setPeriodo(turmaDTO.getPeriodo());
         turma = this.turmaRepository.save(turma);
@@ -57,9 +56,6 @@ public class TurmaService {
         if (turmaDTO == null) {
             throw new IllegalArgumentException("Turma não deve ser nula!");
         }
-        if (StringUtils.isEmpty(turmaDTO.getAlunos())){
-            throw new IllegalArgumentException("Alunos não devem ser nulos!");
-        }
         if (StringUtils.isEmpty(turmaDTO.getNumeroTurma())){
             throw new IllegalArgumentException("Numero da turma não deve ser nulo");
         }
@@ -77,7 +73,6 @@ public class TurmaService {
 
             LOGGER.info("Atualizando turma, id: [{}]", turmaDTO.getId());
 
-            turmaJaExiste.setAlunos(turmaDTO.getAlunos());
             turmaJaExiste.setNumeroTurma(turmaDTO.getNumeroTurma());
             turmaJaExiste.setPeriodo(turmaDTO.getPeriodo());
             turmaJaExiste = this.turmaRepository.save(turmaJaExiste);
@@ -91,5 +86,4 @@ public class TurmaService {
         LOGGER.info("Delete em turma de id: ", id);
         this.turmaRepository.deleteById(id);
     }
-
 }

@@ -1,18 +1,19 @@
 package com.hbsis.boletim.turma;
 
-import com.hbsis.boletim.professor.Professor;
+import com.hbsis.boletim.escola.Escola;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "escolas")
+@Table(name = "turmas")
 public class Turma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "alunos")
-    private String alunos;
+    @ManyToOne
+    @JoinColumn(name = "escola", referencedColumnName = "id")
+    private Escola escola;
     @Column(name = "numero_turma")
     private String numeroTurma;
     @Column(name = "periodo")
@@ -24,14 +25,6 @@ public class Turma {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(String alunos) {
-        this.alunos = alunos;
     }
 
     public String getNumeroTurma() {
@@ -50,11 +43,19 @@ public class Turma {
         this.periodo = periodo;
     }
 
+    public Escola getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Escola escola) {
+        this.escola = escola;
+    }
+
     @Override
     public String toString() {
         return "Turma{" +
                 "id=" + id +
-                ", alunos='" + alunos + '\'' +
+                ", escola=" + escola +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
                 '}';
