@@ -1,5 +1,7 @@
 package com.hbsis.boletim.turma;
 
+import com.hbsis.boletim.professor.Professor;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,8 +17,6 @@ public class Turma {
     private String numeroTurma;
     @Column(name = "periodo")
     private String periodo;
-    @JoinColumn(name = "professores")
-    private Professor professor;
 
     public long getId() {
         return id;
@@ -50,14 +50,6 @@ public class Turma {
         this.periodo = periodo;
     }
 
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
-
     @Override
     public String toString() {
         return "Turma{" +
@@ -65,7 +57,6 @@ public class Turma {
                 ", alunos='" + alunos + '\'' +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
-                ", professor=" + professor +
                 '}';
     }
 }
