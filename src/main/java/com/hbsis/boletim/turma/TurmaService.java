@@ -41,6 +41,15 @@ public class TurmaService {
         throw new IllegalArgumentException(String.format("ID %s não existe", id));
     }
 
+    public Turma findByCodigoNumeroTurma(String numeroTurma){
+        Optional<Turma> optional = this.turmaRepository.findByNumeroTurma(numeroTurma);
+
+        if (optional.isPresent()){
+            return optional.get();
+        }
+        throw new IllegalArgumentException(String.format("Numero da turma: %s não existe", numeroTurma));
+    }
+
     public Turma findByTurmaId(Long id){
         Optional<Turma> turmaOptional = this.turmaRepository.findById(id);
 

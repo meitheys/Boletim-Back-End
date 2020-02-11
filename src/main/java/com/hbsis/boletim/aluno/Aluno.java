@@ -13,8 +13,6 @@ public class Aluno {
     private String responsavel;
     @Column(name = "telefone")
     private String telefone;
-   // @JoinColumn(name = "sala")
-    //private Sala sala;
 
     public long getId() {
         return id;
@@ -47,14 +45,6 @@ public class Aluno {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    /*public Sala getSala() {
-        return sala;
-    }
-
-    public void setSala(Sala sala) {
-        this.sala = sala;
-    }*/
 
     @Override
     public String toString() {

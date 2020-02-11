@@ -1,6 +1,8 @@
 package com.hbsis.boletim.professor;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Objects;
 
 @Entity
 @Table(name = "professores")
