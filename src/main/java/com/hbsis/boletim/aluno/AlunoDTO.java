@@ -1,7 +1,5 @@
 package com.hbsis.boletim.aluno;
 
-import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurmaDTO;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,25 +8,23 @@ public class AlunoDTO {
     private String nomeAluno;
     private String responsavel;
     private String telefone;
-    private List<AlunoTurmaDTO> alunoTurmaDTOList;
+    private String turma;
 
-    public AlunoDTO(long id, String nomeAluno, String responsavel, String telefone, List<AlunoTurmaDTO> alunoTurmaDTOList) {
+    public AlunoDTO(long id, String nomeAluno, String responsavel, String telefone, String turma) {
         this.id = id;
         this.nomeAluno = nomeAluno;
         this.responsavel = responsavel;
         this.telefone = telefone;
-        this.alunoTurmaDTOList = alunoTurmaDTOList;
+        this.turma = turma;
     }
 
     public static AlunoDTO of(Aluno aluno) {
-        List<AlunoTurmaDTO> alunoTurmaDTOList = new ArrayList<>();
-        aluno.getAlunoTurmaList().forEach(alunoTurma -> alunoTurmaDTOList.add(AlunoTurmaDTO.of(alunoTurma)));
         return new AlunoDTO(
                 aluno.getId(),
                 aluno.getNomeAluno(),
                 aluno.getResponsavel(),
                 aluno.getTelefone(),
-                alunoTurmaDTOList
+                aluno.getTurma().getNumeroTurma()
         );
     }
 
@@ -67,12 +63,12 @@ public class AlunoDTO {
         this.telefone = telefone;
     }
 
-    public List<AlunoTurmaDTO> getAlunoTurmaDTOList() {
-        return alunoTurmaDTOList;
+    public String getTurma() {
+        return turma;
     }
 
-    public void setAlunoTurmaDTOList(List<AlunoTurmaDTO> alunoTurmaDTOList) {
-        this.alunoTurmaDTOList = alunoTurmaDTOList;
+    public void setTurma(String turma) {
+        this.turma = turma;
     }
 
     @Override
@@ -82,7 +78,7 @@ public class AlunoDTO {
                 ", nomeAluno='" + nomeAluno + '\'' +
                 ", responsavel='" + responsavel + '\'' +
                 ", telefone='" + telefone + '\'' +
-                ", alunoTurmaDTOList=" + alunoTurmaDTOList +
+                ", turma='" + turma + '\'' +
                 '}';
     }
 }

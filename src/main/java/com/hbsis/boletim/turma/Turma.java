@@ -1,27 +1,35 @@
 package com.hbsis.boletim.turma;
 
-import com.hbsis.boletim.escola.Escola;
-import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurma;
+import com.hbsis.boletim.aluno.Aluno;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "turmas")
-public class Turma {
+public class Turma implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @ManyToOne
-    @JoinColumn(name = "escola", referencedColumnName = "id")
-    private Escola escola;
     @Column(name = "numero_turma")
     private String numeroTurma;
     @Column(name = "periodo")
     private String periodo;
-    @OneToMany(mappedBy = "idTurma")
-    private List<AlunoTurma> alunoTurmaListB;
+    @Column(name = "disciplina")
+    private String disciplina;
+
+    /*
+    @ManyToMany(targetEntity = Aluno.class)
+    @JoinTable(name = "aluno_turma", joinColumns = {
+            @JoinColumn(name = "id_turma", referencedColumnName = "id")},
+    inverseJoinColumns = {
+            @JoinColumn(name = "id_aluno", referencedColumnName = "id")})
+            @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    private List<Aluno> alunos;
+    */
 
     public long getId() {
         return id;
@@ -47,30 +55,21 @@ public class Turma {
         this.periodo = periodo;
     }
 
-    public Escola getEscola() {
-        return escola;
+    public String getDisciplina() {
+        return disciplina;
     }
 
-    public void setEscola(Escola escola) {
-        this.escola = escola;
-    }
-
-    public List<AlunoTurma> getAlunoTurmaListB() {
-        return alunoTurmaListB;
-    }
-
-    public void setAlunoTurmaListB(List<AlunoTurma> alunoTurmaListB) {
-        this.alunoTurmaListB = alunoTurmaListB;
+    public void setDisciplina(String disciplina) {
+        this.disciplina = disciplina;
     }
 
     @Override
     public String toString() {
         return "Turma{" +
                 "id=" + id +
-                ", escola=" + escola +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
-                ", alunoTurmaListB=" + alunoTurmaListB +
+                ", disciplina='" + disciplina + '\'' +
                 '}';
     }
 }

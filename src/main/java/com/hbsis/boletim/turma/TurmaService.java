@@ -1,17 +1,19 @@
 package com.hbsis.boletim.turma;
 
-import com.hbsis.boletim.escola.EscolaService;
+import com.hbsis.boletim.aluno.AlunoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TurmaService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EscolaService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TurmaService.class);
     private TurmaRepository turmaRepository;
 
     public TurmaService(TurmaRepository turmaRepository) {
@@ -19,16 +21,34 @@ public class TurmaService {
     }
 
     public TurmaDTO save(TurmaDTO turmaDTO) throws IOException {
-        this.validate(turmaDTO);
+
+        /*this.validate(turmaDTO);
         LOGGER.info("Salvando turma");
         LOGGER.debug("Turma {}", turmaDTO);
+        List<AlunoTurma> alunoTurmaDTOList = new ArrayList<>();
 
         Turma turma = new Turma();
+        turma.setEscola(escolaService.findByEscolaId(turmaDTO.getEscola()));
         turma.setNumeroTurma(turmaDTO.getNumeroTurma());
         turma.setPeriodo(turmaDTO.getPeriodo());
-        turma = this.turmaRepository.save(turma);
 
-        return turmaDTO.of(turma);
+        turma = this.turmaRepository.save(turma);
+        return turmaDTO.of(turma);*/
+
+        return TurmaDTO.of(this.saveGenerico(turmaDTO));
+    }
+
+    private Turma saveGenerico(TurmaDTO turmaDTO) {
+        Turma turma = this.fromDTO(turmaDTO, new Turma());
+        turma = this.turmaRepository.save(turma);
+        return turma;
+    }
+
+    private Turma fromDTO(TurmaDTO turmaDTO, Turma turma) {
+        turma.setNumeroTurma(turmaDTO.getNumeroTurma());
+        turma.setPeriodo(turmaDTO.getPeriodo());
+        turma.setDisciplina(turmaDTO.getDisciplina());
+        return turma;
     }
 
     public TurmaDTO findById(Long id) {
@@ -84,6 +104,7 @@ public class TurmaService {
 
             turmaJaExiste.setNumeroTurma(turmaDTO.getNumeroTurma());
             turmaJaExiste.setPeriodo(turmaDTO.getPeriodo());
+            turmaJaExiste.setDisciplina(turmaDTO.getDisciplina());
             turmaJaExiste = this.turmaRepository.save(turmaJaExiste);
 
             return turmaDTO.of(turmaJaExiste);
@@ -95,4 +116,18 @@ public class TurmaService {
         LOGGER.info("Delete em turma de id: ", id);
         this.turmaRepository.deleteById(id);
     }
+
+    /*
+    private List<AlunoTurma> parseList(List<AlunoTurmaDTO> alunoTurmaDTOS, Turma turma){
+        List<AlunoTurma> alunoTurmas = new ArrayList<>();
+        for (AlunoTurmaDTO alunoTurmaDTO : alunoTurmaDTOS){
+            AlunoTurma alunoTurma = new AlunoTurma();
+            alunoTurma.setIdAluno(alunoService.findByIdAluno(alunoTurmaDTO.getIdAluno()));
+            alunoTurma.setIdTurma(turma);
+            alunoTurmas.add(alunoTurma);
+        }
+        return alunoTurmas;
+    }
+    */
+
 }

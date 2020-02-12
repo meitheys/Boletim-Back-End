@@ -1,7 +1,5 @@
 package com.hbsis.boletim.aluno;
 
-import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurma;
-import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurmaDTO;
 import com.hbsis.boletim.turma.TurmaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,20 +24,14 @@ public class AlunoService {
         this.validate(alunoDTO);
         LOGGER.info("Salvando aluno");
         LOGGER.debug("Aluno {}", alunoDTO);
-        List<AlunoTurma> alunoTurmaDTOList = new ArrayList<>();
 
         Aluno aluno = new Aluno();
         aluno.setNomeAluno(alunoDTO.getNomeAluno());
         aluno.setResponsavel(alunoDTO.getResponsavel());
         aluno.setTelefone(alunoDTO.getTelefone());
+        aluno.setTurma(turmaService.findByCodigoNumeroTurma(alunoDTO.getTurma()));
         aluno = this.alunoRepository.save(aluno);
 
-        for (AlunoTurmaDTO alunoTurmaDTO : alunoDTO.getAlunoTurmaDTOList()){
-            AlunoTurma alunoTurma = new AlunoTurma();
-            alunoTurma.setIdAluno(aluno);
-            alunoTurma.setIdTurma(turmaService.findByCodigoNumeroTurma(alunoTurmaDTO.getIdTurma()));
-            alunoTurmaDTOList.add(alunoTurma);
-        }
         return alunoDTO.of(aluno);
     }
 
@@ -55,24 +45,33 @@ public class AlunoService {
         throw new IllegalArgumentException(String.format("ID %s não existe", id));
     }
 
+    public Aluno findByIdAluno(long id){
+        Optional<Aluno> optional = this.alunoRepository.findById(id);
+
+        if (optional.isPresent()){
+            return optional.get();
+        }
+        throw new IllegalArgumentException(String.format("Id: %s não existe", id));
+    }
+
     private void validate(AlunoDTO alunoDTO) {
         LOGGER.info("Validando aluno...");
 
         if (alunoDTO == null) {
             throw new IllegalArgumentException("Aluno não deve ser nulo!");
         }
-        if (StringUtils.isEmpty(alunoDTO.getNomeAluno())){
+        if (StringUtils.isEmpty(alunoDTO.getNomeAluno())) {
             throw new IllegalArgumentException("Nome do aluno não deve ser nulo");
         }
-        if (StringUtils.isEmpty(alunoDTO.getTelefone())){
+        if (StringUtils.isEmpty(alunoDTO.getTelefone())) {
             throw new IllegalArgumentException("Telefone do aluno não deve ser nulo");
         }
     }
 
-    public Aluno findByOptionalId(long id){
+    public Aluno findByOptionalId(long id) {
         Optional<Aluno> optional = this.alunoRepository.findById(id);
 
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             return optional.get();
         }
         throw new IllegalArgumentException(String.format("Numero da turma: %s não existe", id));
@@ -88,7 +87,8 @@ public class AlunoService {
             LOGGER.info("Atualizando aluno, id: [{}]", alunoDTO.getId());
 
             alunoJaExiste.setNomeAluno(alunoDTO.getNomeAluno());
-            alunoJaExiste.setResponsavel(alunoDTO.getResponsavel());;
+            alunoJaExiste.setResponsavel(alunoDTO.getResponsavel());
+            ;
             alunoJaExiste.setTelefone(alunoDTO.getTelefone());
             alunoJaExiste = this.alunoRepository.save(alunoJaExiste);
 

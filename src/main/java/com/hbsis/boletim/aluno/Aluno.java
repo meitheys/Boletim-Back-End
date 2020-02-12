@@ -1,13 +1,14 @@
 package com.hbsis.boletim.aluno;
 
-import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurma;
+import com.hbsis.boletim.turma.Turma;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "alunos")
-public class Aluno {
+public class Aluno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -18,8 +19,9 @@ public class Aluno {
     private String responsavel;
     @Column(name = "telefone")
     private String telefone;
-    @OneToMany(mappedBy = "idAluno")
-    private List<AlunoTurma> alunoTurmaList;
+    @ManyToOne
+    @JoinColumn(name = "turma", referencedColumnName = "numero_turma")
+    private Turma turma;
 
     public long getId() {
         return id;
@@ -53,12 +55,12 @@ public class Aluno {
         this.telefone = telefone;
     }
 
-    public List<AlunoTurma> getAlunoTurmaList() {
-        return alunoTurmaList;
+    public Turma getTurma() {
+        return turma;
     }
 
-    public void setAlunoTurmaList(List<AlunoTurma> alunoTurmaList) {
-        this.alunoTurmaList = alunoTurmaList;
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class Aluno {
                 ", nomeAluno='" + nomeAluno + '\'' +
                 ", responsavel='" + responsavel + '\'' +
                 ", telefone='" + telefone + '\'' +
-                ", alunoTurmaList=" + alunoTurmaList +
+                ", turma=" + turma +
                 '}';
     }
 }

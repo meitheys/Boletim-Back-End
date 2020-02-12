@@ -1,37 +1,38 @@
 package com.hbsis.boletim.turma;
 
-import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurma;
-import com.hbsis.boletim.ligaçãoAlunoTurma.AlunoTurmaDTO;
+import com.hbsis.boletim.aluno.Aluno;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TurmaDTO {
     private long id;
-    private long escola;
     private String numeroTurma;
     private String periodo;
-    private List<AlunoTurmaDTO> alunoTurmaListB;
+    private String disciplina;
 
     public TurmaDTO(){}
 
-    public TurmaDTO(long id, long escola, String numeroTurma, String periodo, List<AlunoTurmaDTO> alunoTurmaListB) {
+    public TurmaDTO(long id, String numeroTurma, String periodo, String disciplina) {
         this.id = id;
-        this.escola = escola;
         this.numeroTurma = numeroTurma;
         this.periodo = periodo;
-        this.alunoTurmaListB = alunoTurmaListB;
+        this.disciplina = disciplina;
     }
 
     public static TurmaDTO of(Turma turma) {
-        List<AlunoTurmaDTO> alunoTurmaListB = new ArrayList<>();
-        turma.getAlunoTurmaListB().forEach(alunoTurma -> alunoTurmaListB.add(AlunoTurmaDTO.of(alunoTurma)));
+
+
+       /* List<Aluno> aluno = new ArrayList<>();
+        for(int i=0; i>turma.getAlunos().size(); i++){
+            aluno.add(turma.getAlunos().get(i));
+        }*/
+
         return new TurmaDTO(
                 turma.getId(),
-                turma.getEscola().getId(),
                 turma.getNumeroTurma(),
                 turma.getPeriodo(),
-                alunoTurmaListB
+                turma.getDisciplina()
         );
     }
 
@@ -59,30 +60,21 @@ public class TurmaDTO {
         this.periodo = periodo;
     }
 
-    public long getEscola() {
-        return escola;
+    public String getDisciplina() {
+        return disciplina;
     }
 
-    public void setEscola(long escola) {
-        this.escola = escola;
-    }
-
-    public List<AlunoTurmaDTO> getAlunoTurmaListB() {
-        return alunoTurmaListB;
-    }
-
-    public void setAlunoTurmaListB(List<AlunoTurmaDTO> alunoTurmaListB) {
-        this.alunoTurmaListB = alunoTurmaListB;
+    public void setDisciplina(String disciplina) {
+        this.disciplina = disciplina;
     }
 
     @Override
     public String toString() {
         return "TurmaDTO{" +
                 "id=" + id +
-                ", escola=" + escola +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
-                ", alunoTurmaListB=" + alunoTurmaListB +
+                ", disciplina='" + disciplina + '\'' +
                 '}';
     }
 }

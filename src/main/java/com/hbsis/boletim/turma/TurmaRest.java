@@ -26,7 +26,6 @@ public class TurmaRest {
         return this.turmaService.save(turmaDTO);
     }
 
-
     @GetMapping("/{id}")
     public TurmaDTO findEscola(@PathVariable("id") Long id) {
         LOGGER.info("Procurando com base em id: [{}]", id);
