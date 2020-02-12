@@ -6,3 +6,4 @@ CREATE TABLE professores(
     disciplina VARCHAR (25),
     telefone VARCHAR (13)
 );
+

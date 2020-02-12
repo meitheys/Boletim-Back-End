@@ -1,26 +1,38 @@
 package com.hbsis.boletim.turma;
 
+import com.hbsis.boletim.aluno.Aluno;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TurmaDTO {
     private long id;
-    private long escola;
     private String numeroTurma;
     private String periodo;
+    private String disciplina;
 
     public TurmaDTO(){}
 
-    public TurmaDTO(long id, long escola, String numeroTurma, String periodo) {
+    public TurmaDTO(long id, String numeroTurma, String periodo, String disciplina) {
         this.id = id;
-        this.escola = escola;
         this.numeroTurma = numeroTurma;
         this.periodo = periodo;
+        this.disciplina = disciplina;
     }
 
     public static TurmaDTO of(Turma turma) {
+
+
+       /* List<Aluno> aluno = new ArrayList<>();
+        for(int i=0; i>turma.getAlunos().size(); i++){
+            aluno.add(turma.getAlunos().get(i));
+        }*/
+
         return new TurmaDTO(
                 turma.getId(),
-                turma.getEscola().getId(),
                 turma.getNumeroTurma(),
-                turma.getPeriodo()
+                turma.getPeriodo(),
+                turma.getDisciplina()
         );
     }
 
@@ -48,21 +60,21 @@ public class TurmaDTO {
         this.periodo = periodo;
     }
 
-    public long getEscola() {
-        return escola;
+    public String getDisciplina() {
+        return disciplina;
     }
 
-    public void setEscola(long escola) {
-        this.escola = escola;
+    public void setDisciplina(String disciplina) {
+        this.disciplina = disciplina;
     }
 
     @Override
     public String toString() {
         return "TurmaDTO{" +
                 "id=" + id +
-                ", escola=" + escola +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
+                ", disciplina='" + disciplina + '\'' +
                 '}';
     }
 }

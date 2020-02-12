@@ -1,16 +1,21 @@
 package com.hbsis.boletim.aluno;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AlunoDTO {
     private long id;
     private String nomeAluno;
     private String responsavel;
     private String telefone;
+    private String turma;
 
-    public AlunoDTO(long id, String nomeAluno, String responsavel, String telefone) {
+    public AlunoDTO(long id, String nomeAluno, String responsavel, String telefone, String turma) {
         this.id = id;
         this.nomeAluno = nomeAluno;
         this.responsavel = responsavel;
         this.telefone = telefone;
+        this.turma = turma;
     }
 
     public static AlunoDTO of(Aluno aluno) {
@@ -18,7 +23,8 @@ public class AlunoDTO {
                 aluno.getId(),
                 aluno.getNomeAluno(),
                 aluno.getResponsavel(),
-                aluno.getTelefone()
+                aluno.getTelefone(),
+                aluno.getTurma().getNumeroTurma()
         );
     }
 
@@ -57,6 +63,14 @@ public class AlunoDTO {
         this.telefone = telefone;
     }
 
+    public String getTurma() {
+        return turma;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
+    }
+
     @Override
     public String toString() {
         return "AlunoDTO{" +
@@ -64,6 +78,7 @@ public class AlunoDTO {
                 ", nomeAluno='" + nomeAluno + '\'' +
                 ", responsavel='" + responsavel + '\'' +
                 ", telefone='" + telefone + '\'' +
+                ", turma='" + turma + '\'' +
                 '}';
     }
 }

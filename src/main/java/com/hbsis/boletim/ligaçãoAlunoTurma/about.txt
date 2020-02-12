@@ -1,9 +1,0 @@
-Essa é uma tabela que fará uma ligação entre outras duas tabelas, elas são: Alunos e Turma.
-
-Exemplo:
-
-Alunos  |   Turma
-   1          1
-   2          1
-   3          2
-   4          1
