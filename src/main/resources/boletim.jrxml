@@ -22,13 +22,12 @@
     </field>
 
     <field name="telefone" class="java.lang.String">
-        
+
     </field>
 
     <field name="turma" class="java.lang.Object">
 
     </field>
-
     <group name="Group1">
         <groupExpression><![CDATA[$F{id}]]></groupExpression>
         <groupHeader>
