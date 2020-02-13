@@ -51,6 +51,9 @@ public class NotasService {
         if (StringUtils.isEmpty(notasDTO.getNota())) {
             throw new IllegalArgumentException("Nota não deve ser nula");
         }
+        if (notasDTO.getNota() > 10 || notasDTO.getNota() < 0){
+            throw new IllegalArgumentException("Nota inválida");
+        }
     }
 
     public NotasDTO findById(Long id) {

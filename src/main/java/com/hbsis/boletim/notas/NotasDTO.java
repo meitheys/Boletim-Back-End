@@ -1,5 +1,7 @@
 package com.hbsis.boletim.notas;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class NotasDTO {
