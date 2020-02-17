@@ -47,7 +47,6 @@ public class TurmaService {
     private Turma fromDTO(TurmaDTO turmaDTO, Turma turma) {
         turma.setNumeroTurma(turmaDTO.getNumeroTurma());
         turma.setPeriodo(turmaDTO.getPeriodo());
-        turma.setDisciplina(turmaDTO.getDisciplina());
         return turma;
     }
 
@@ -57,15 +56,6 @@ public class TurmaService {
         if (turmaOptional.isPresent()) {
             Turma turma = turmaOptional.get();
             return TurmaDTO.of(turma);
-        }
-        throw new IllegalArgumentException(String.format("ID %s não existe", id));
-    }
-
-    public Turma findByIdEntity(Long id) {
-        Optional<Turma> turmaOptional = this.turmaRepository.findById(id);
-
-        if (turmaOptional.isPresent()) {
-            Turma turma = turmaOptional.get();
         }
         throw new IllegalArgumentException(String.format("ID %s não existe", id));
     }
@@ -113,7 +103,6 @@ public class TurmaService {
 
             turmaJaExiste.setNumeroTurma(turmaDTO.getNumeroTurma());
             turmaJaExiste.setPeriodo(turmaDTO.getPeriodo());
-            turmaJaExiste.setDisciplina(turmaDTO.getDisciplina());
             turmaJaExiste = this.turmaRepository.save(turmaJaExiste);
 
             return turmaDTO.of(turmaJaExiste);

@@ -1,11 +1,11 @@
 package com.hbsis.boletim.notas;
 
 import com.hbsis.boletim.aluno.AlunoService;
+import com.hbsis.boletim.disciplinas.DisciplinaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -14,11 +14,13 @@ public class NotasService {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotasService.class);
     private NotasRepository notasRepository;
     private AlunoService alunoService;
+    private DisciplinaService disciplinaService;
 
 
-    public NotasService(NotasRepository notasRepository, AlunoService aluno) {
+    public NotasService(NotasRepository notasRepository, AlunoService alunoService, DisciplinaService disciplinaService) {
         this.notasRepository = notasRepository;
         this.alunoService = alunoService;
+        this.disciplinaService = disciplinaService;
     }
 
     public NotasDTO save(NotasDTO notasDTO) throws IOException {
@@ -28,9 +30,9 @@ public class NotasService {
 
         Notas notas = new Notas();
         notas.setAluno(alunoService.findByIdAluno(notasDTO.getAluno()));
-        notas.setDisciplina(notasDTO.getDisciplina());
-        notas.setNota(notasDTO.getNota());
-        notas.setTrimestre(notasDTO.getTrimestre());
+        notas.setDisciplina(disciplinaService.findById(notasDTO.getDisciplina()));
+        notas.setPrimeiraNota(notasDTO.getPrimeiraNota());
+        notas.setSegundaNota(notasDTO.getSegundaNota());
         notas = this.notasRepository.save(notas);
 
         return notasDTO.of(notas);
@@ -48,10 +50,16 @@ public class NotasService {
         if (StringUtils.isEmpty(notasDTO.getDisciplina())) {
             throw new IllegalArgumentException("Disciplina não deve ser nula");
         }
-        if (StringUtils.isEmpty(notasDTO.getNota())) {
-            throw new IllegalArgumentException("Nota não deve ser nula");
+        if (StringUtils.isEmpty(notasDTO.getPrimeiraNota())) {
+            throw new IllegalArgumentException("Nota 1 não deve ser nula");
         }
-        if (notasDTO.getNota() > 10 || notasDTO.getNota() < 0){
+        if (StringUtils.isEmpty(notasDTO.getSegundaNota())) {
+            throw new IllegalArgumentException("Nota 2 não deve ser nula");
+        }
+        if (notasDTO.getPrimeiraNota() > 10 || notasDTO.getPrimeiraNota() < 0){
+            throw new IllegalArgumentException("Nota inválida");
+        }
+        if (notasDTO.getSegundaNota() > 10 || notasDTO.getSegundaNota() < 0){
             throw new IllegalArgumentException("Nota inválida");
         }
     }
@@ -75,10 +83,10 @@ public class NotasService {
 
             LOGGER.info("Atualizando notas, id: [{}]", notasDTO.getId());
 
-            notasJaExiste.setNota(notasDTO.getNota());
-            notasJaExiste.setDisciplina(notasDTO.getDisciplina());
             notasJaExiste.setAluno(alunoService.findByIdAluno(notasDTO.getAluno()));
-            notasJaExiste.setTrimestre(notasDTO.getTrimestre());
+            notasJaExiste.setDisciplina(disciplinaService.findById(notasDTO.getDisciplina()));
+            notasJaExiste.setPrimeiraNota(notasDTO.getPrimeiraNota());
+            notasJaExiste.setSegundaNota(notasDTO.getSegundaNota());
             notasJaExiste = this.notasRepository.save(notasJaExiste);
 
             return notasDTO.of(notasJaExiste);
@@ -90,5 +98,4 @@ public class NotasService {
         LOGGER.info("Delete em nota de id: ", id);
         this.notasRepository.deleteById(id);
     }
-
 }

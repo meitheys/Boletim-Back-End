@@ -1,8 +1,9 @@
 package com.hbsis.boletim.report;
 
-import com.hbsis.boletim.aluno.Aluno;
 import com.hbsis.boletim.aluno.AlunoRepository;
 import com.hbsis.boletim.aluno.AlunoService;
+import com.hbsis.boletim.notas.Notas;
+import com.hbsis.boletim.notas.NotasRepository;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,25 +21,27 @@ public class ReportService {
     @Autowired
     private final AlunoService alunoService;
     private final AlunoRepository alunoRepository;
+    private final NotasRepository notasRepository;
 
-    public ReportService(AlunoService alunoService, AlunoRepository alunoRepository) {
+    public ReportService(AlunoService alunoService, AlunoRepository alunoRepository, NotasRepository notasRepository) {
         this.alunoService = alunoService;
         this.alunoRepository = alunoRepository;
+        this.notasRepository = notasRepository;
     }
 
-    public String export(String response) throws FileNotFoundException, JRException {
-        List<Aluno> alunoList = alunoRepository.findAll();
+    public String export(String response, long id) throws FileNotFoundException, JRException {
+        List<Notas> notas = notasRepository.findByAluno(alunoService.findByIdAluno(id));
         String path = "C:\\Users\\matheus.furtado\\Desktop\\Reports";
-        File file = ResourceUtils.getFile("classpath:alunos.jrxml");
+        File file = ResourceUtils.getFile("classpath:boletim.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunoList);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(notas);
         Map<String, Object> parametros = new HashMap<>();
-        parametros.put("createdBy", "Aluno");
+        parametros.put("createdBy", "Matheus");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource);
         if(response.equalsIgnoreCase("html")){
-            JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "\\alunos.html"); }
+            JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "\\boletim.html"); }
         if (response.equalsIgnoreCase("pdf")){
-            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\alunos.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\boletim.pdf");
         }
         return "Gerado no caminho: " + path;
     }

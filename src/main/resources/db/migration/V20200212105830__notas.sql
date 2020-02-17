@@ -1,7 +1,14 @@
 CREATE TABLE notas(
-    id BIGINT NOT NULL,
+    id BIGINT IDENTITY(1,1)  NOT NULL,
     aluno BIGINT NOT NULL,
-    nota DECIMAL NOT NULL,
-    disciplina VARCHAR (25) NOT NULL,
-    trimestre VARCHAR(20) NOT NULL
-);
+    nota_um DECIMAL NOT NULL,
+    nota_dois DECIMAL NOT NULL,
+    disciplina BIGINT NOT NULL,
+)
+
+ALTER TABLE notas
+ADD CONSTRAINT fk5AL FOREIGN KEY (aluno) REFERENCES alunos (id) ON DELETE CASCADE;
+
+
+ALTER TABLE notas
+ADD CONSTRAINT fk6AL FOREIGN KEY (disciplina) REFERENCES disciplinas(id) ON DELETE CASCADE;

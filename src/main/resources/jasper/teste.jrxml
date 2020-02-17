@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="boletinss" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20" uuid="33e39e9c-b171-448a-911c-0f3868c55c44">
+
+    <field name="aluno" class="java.lang.Long">
+        <property name="net.sf.jasperreports.javabean.field.property" value="alunos.nomeAluno"/>
+    </field>
+
+    <field name="nomeAluno" class="java.math.BigDecimal">
+        <property name="net.sf.jasperreports.javabean.field.property" value="alunos.nomeAluno"/>
+    </field>
+
+    <field name="responsavel" class="java.lang.String">
+        <property name="net.sf.jasperreports.javabean.field.property" value="alunos.responsavel"/>
+    </field>
+
+    <field name="telefone" class="java.lang.String">
+        <property name="net.sf.jasperreports.javabean.field.property" value="alunos.nomeAluno"/>
+    </field>
+
+    <field name="turma" class="java.lang.Object">
+        <property name="net.sf.jasperreports.javabean.field.property" value="alunos.nomeAluno"/>
+    </field>
+
+    <group name="Group2">
+        <groupExpression><![CDATA[$F{aluno}]]></groupExpression>
+        <groupHeader>
+            <band height="32">
+                <textField>
+                    <reportElement x="100" y="0" width="455" height="32" forecolor="#006699"
+                                   uuid="e83946ad-f2c3-4fc6-8a2f-ba66f74e5b39"/>
+                    <textElement>
+                        <font size="22" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{aluno}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement x="0" y="0" width="100" height="20" forecolor="#666666"
+                                   uuid="d6ee5630-bb33-4c46-a197-b0e093ec87e3"/>
+                    <textElement>
+                        <font size="12"/>
+                    </textElement>
+                    <text><![CDATA[aluno]]></text>
+                </staticText>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band/>
+        </groupFooter>
+    </group>
+    <group name="Group3">
+        <groupExpression><![CDATA[$F{nota}]]></groupExpression>
+        <groupHeader>
+            <band height="31">
+                <staticText>
+                    <reportElement x="0" y="10" width="100" height="20" forecolor="#666666"
+                                   uuid="1aa5bfc0-92bc-4937-89b1-25458cec7fe7"/>
+                    <textElement>
+                        <font size="12"/>
+                    </textElement>
+                    <text><![CDATA[nota]]></text>
+                </staticText>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band/>
+        </groupFooter>
+    </group>
+    <group name="Group4">
+        <groupExpression><![CDATA[$F{disciplina}]]></groupExpression>
+        <groupHeader>
+            <band height="46">
+                <staticText>
+                    <reportElement x="0" y="26" width="100" height="20" forecolor="#666666"
+                                   uuid="51283e60-9417-483d-a9fe-73d49b81acb2"/>
+                    <textElement>
+                        <font size="12"/>
+                    </textElement>
+                    <text><![CDATA[disciplina]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="100" y="-20" width="455" height="32" forecolor="#006699"
+                                   uuid="6c1e051d-a45d-4ec4-a711-6c0f2f11a543"/>
+                    <textElement>
+                        <font size="20" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{nota}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band/>
+        </groupFooter>
+    </group>
+    <group name="trimestre">
+        <groupExpression><![CDATA[$F{trimestre}]]></groupExpression>
+    </group>
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="72">
+            <frame>
+                <reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"
+                               uuid="01f99753-7bea-490c-aa3d-42bef30488c1"/>
+                <staticText>
+                    <reportElement x="20" y="20" width="130" height="43" forecolor="#FFFFFF"
+                                   uuid="fd300d41-e2d1-4581-a3a9-9d7bf86396e5"/>
+                    <textElement>
+                        <font size="34" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Boletim]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="400" y="35" width="184" height="23" forecolor="#FFFFFF"
+                                   uuid="cdc30c23-8770-4b14-9b58-bf5a8a83e34a"/>
+                    <textElement textAlignment="Right">
+                        <font size="14" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[Relatório de Notas por Aluno]]></text>
+                </staticText>
+                <line>
+                    <reportElement x="0" y="92" width="595" height="1" forecolor="#666666"
+                                   uuid="2799806a-9791-4b86-a8d4-9d9cd3070c00">
+                        <property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+                        <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                    </reportElement>
+                </line>
+            </frame>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="13"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="74"/>
+    </columnHeader>
+    <detail>
+        <band height="20">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"
+                               uuid="4f300359-8752-4900-b9ce-270241fec6f5"/>
+            </line>
+            <textField>
+                <reportElement x="99" y="-22" width="455" height="32" forecolor="#006699"
+                               uuid="500ddf48-bdae-46c5-916a-247a2658b397"/>
+                <textElement>
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{disciplina}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band/>
+    </columnFooter>
+    <pageFooter>
+        <band height="17">
+            <textField>
+                <reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"
+                               uuid="481a83ee-23eb-4c88-8240-8591e1a554a8"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"
+                               uuid="062bee93-7687-479d-b420-c6057c0546a8"/>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="0" y="4" width="100" height="13" uuid="9ed6368e-fbf3-40f2-94b4-9073de252063"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band/>
+    </summary>
+</jasperReport>
