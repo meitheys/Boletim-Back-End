@@ -4,18 +4,27 @@
     <field name="id" class="java.lang.Long">
         <property name="com.jaspersoft.studio.field.label" value="id"/>
     </field>
+
     <field name="aluno" class="java.lang.Object">
         <property name="com.jaspersoft.studio.field.label" value="aluno.nomeAluno"/>
     </field>
+
     <field name="primeiraNota" class="java.lang.Double">
         <property name="com.jaspersoft.studio.field.label" value="disciplina.primeiraNota"/>
     </field>
+
     <field name="segundaNota" class="java.lang.Double">
         <property name="com.jaspersoft.studio.field.label" value="disciplina.segundaNota"/>
     </field>
+
     <field name="disciplina" class="java.lang.Object">
         <property name="com.jaspersoft.studio.field.label" value="disciplina.disciplinas"/>
     </field>
+
+    <field name="media" class="java.lang.Double">
+        <property name="com.jaspersoft.studio.field.label" value="aluno.media"/>
+    </field>
+
     <group name="Group1">
         <groupExpression><![CDATA[$F{id}]]></groupExpression>
         <groupHeader>
@@ -43,6 +52,7 @@
             <band/>
         </groupFooter>
     </group>
+
     <group name="Group2">
         <groupExpression><![CDATA[$F{aluno}]]></groupExpression>
         <groupHeader>
@@ -67,6 +77,7 @@
             <band/>
         </groupFooter>
     </group>
+
     <group name="Group3">
         <groupExpression><![CDATA[$F{primeiraNota}]]></groupExpression>
         <groupHeader>
@@ -91,6 +102,7 @@
             <band/>
         </groupFooter>
     </group>
+
     <group name="Group4">
         <groupExpression><![CDATA[$F{segundaNota}]]></groupExpression>
         <groupHeader>
@@ -115,9 +127,32 @@
             <band/>
         </groupFooter>
     </group>
-    <group name="disciplina">
-        <groupExpression><![CDATA[$F{disciplina}]]></groupExpression>
+
+    <group name="media">
+        <groupExpression><![CDATA[$F{media}]]></groupExpression>
+        <groupHeader>
+            <band height="32">
+                <textField>
+                    <reportElement x="100" y="0" width="455" height="32" forecolor="#006699" uuid="60d86379-28c5-4606-9bf6-c8b3c33e4f5c"/>
+                    <textElement>
+                        <font size="16" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{media}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="abc16bf6-a978-41a5-a651-dcffde23ac1e"/>
+                    <textElement>
+                        <font size="12"/>
+                    </textElement>
+                    <text><![CDATA[media]]></text>
+                </staticText>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band/>
+        </groupFooter>
     </group>
+
     <background>
         <band/>
     </background>

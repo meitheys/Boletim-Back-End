@@ -34,14 +34,14 @@ public class ReportService {
         String path = "C:\\Users\\matheus.furtado\\Desktop\\Reports";
         File file = ResourceUtils.getFile("classpath:boletim.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(notas);
-        Map<String, Object> parametros = new HashMap<>();
-        parametros.put("createdBy", "Matheus");
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource);
-        if(response.equalsIgnoreCase("html")){
-            JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "\\boletim.html"); }
-        if (response.equalsIgnoreCase("pdf")){
-            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\boletim.pdf");
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(notas);
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("createdBy", "Matheus");
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource);
+            if(response.equalsIgnoreCase("html")){
+                JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "\\boletim" + id + ".html"); }
+            if (response.equalsIgnoreCase("pdf")){
+                JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\boletim" + id + ".pdf");
         }
         return "Gerado no caminho: " + path;
     }

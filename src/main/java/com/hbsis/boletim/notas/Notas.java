@@ -17,6 +17,8 @@ public class Notas {
     private Double primeiraNota;
     @Column(name = "nota_dois")
     private Double segundaNota;
+    @Column(name = "media")
+    private double media;
     @ManyToOne
     @JoinColumn(name = "aluno", referencedColumnName = "id")
     private Aluno aluno;
@@ -48,6 +50,14 @@ public class Notas {
         this.segundaNota = segundaNota;
     }
 
+    public double getMedia() {
+        return media;
+    }
+
+    public void setMedia(double media) {
+        this.media = media;
+    }
+
     public Aluno getAluno() {
         return aluno;
     }
@@ -70,6 +80,7 @@ public class Notas {
                 "id=" + id +
                 ", primeiraNota=" + primeiraNota +
                 ", segundaNota=" + segundaNota +
+                ", media=" + media +
                 ", aluno=" + aluno +
                 ", disciplina=" + disciplina +
                 '}';

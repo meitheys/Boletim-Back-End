@@ -4,6 +4,7 @@ CREATE TABLE notas(
     nota_um DECIMAL NOT NULL,
     nota_dois DECIMAL NOT NULL,
     disciplina BIGINT NOT NULL,
+    media DECIMAL NOT NULL
 )
 
 ALTER TABLE notas

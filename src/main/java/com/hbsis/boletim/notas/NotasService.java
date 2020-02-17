@@ -33,7 +33,9 @@ public class NotasService {
         notas.setDisciplina(disciplinaService.findById(notasDTO.getDisciplina()));
         notas.setPrimeiraNota(notasDTO.getPrimeiraNota());
         notas.setSegundaNota(notasDTO.getSegundaNota());
+        notas.setMedia(notasDTO.getPrimeiraNota() + notasDTO.getSegundaNota() / 2);
         notas = this.notasRepository.save(notas);
+
 
         return notasDTO.of(notas);
     }
@@ -87,6 +89,7 @@ public class NotasService {
             notasJaExiste.setDisciplina(disciplinaService.findById(notasDTO.getDisciplina()));
             notasJaExiste.setPrimeiraNota(notasDTO.getPrimeiraNota());
             notasJaExiste.setSegundaNota(notasDTO.getSegundaNota());
+            notasJaExiste.setMedia(notasDTO.getPrimeiraNota() + notasDTO.getSegundaNota() / 2);
             notasJaExiste = this.notasRepository.save(notasJaExiste);
 
             return notasDTO.of(notasJaExiste);

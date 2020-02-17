@@ -6,6 +6,7 @@ public class NotasDTO {
     private long id;
     private double primeiraNota;
     private double segundaNota;
+    private double media;
     private long aluno;
     private long disciplina;
 
@@ -13,7 +14,7 @@ public class NotasDTO {
     }
 
     @Autowired
-    public NotasDTO(long id, double primeiraNota, double segundaNota, long aluno, long disciplina) {
+    public NotasDTO(long id, double primeiraNota, double segundaNota, double media, long aluno, long disciplina) {
         this.id = id;
         this.aluno = aluno;
         this.primeiraNota = primeiraNota;
@@ -27,6 +28,7 @@ public class NotasDTO {
                 notas.getId(),
                 notas.getPrimeiraNota(),
                 notas.getSegundaNota(),
+                notas.getMedia(),
                 notas.getAluno().getId(),
                 notas.getDisciplina().getId()
         );
@@ -56,6 +58,14 @@ public class NotasDTO {
         this.segundaNota = segundaNota;
     }
 
+    public double getMedia() {
+        return media;
+    }
+
+    public void setMedia(double media) {
+        this.media = media;
+    }
+
     public long getAluno() {
         return aluno;
     }
@@ -78,6 +88,7 @@ public class NotasDTO {
                 "id=" + id +
                 ", primeiraNota=" + primeiraNota +
                 ", segundaNota=" + segundaNota +
+                ", media=" + media +
                 ", aluno=" + aluno +
                 ", disciplina=" + disciplina +
                 '}';
