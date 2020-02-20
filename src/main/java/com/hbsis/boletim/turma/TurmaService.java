@@ -92,6 +92,14 @@ public class TurmaService {
         }
     }
 
+    public List<Turma> findAll(){
+        List<Turma> turmaList = new ArrayList<>();
+        try{
+            turmaList = this.turmaRepository.findAll();
+        }catch (Exception e){ }
+        return turmaList;
+    }
+
     public TurmaDTO update(TurmaDTO turmaDTO, Long id) {
         this.validate(turmaDTO);
         Optional<Turma> turmaExistente = this.turmaRepository.findById(id);

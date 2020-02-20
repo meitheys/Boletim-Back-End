@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +37,14 @@ public class DisciplinaService {
             return disciplinaOptional.get();
         }
         throw new IllegalArgumentException(String.format("ID %s não existe", id));
+    }
+
+    public List<Disciplina> findAll(){
+        List<Disciplina> disciplinaList = new ArrayList<>();
+        try{
+            disciplinaList = this.disciplinaRepository.findAll();
+        }catch (Exception e){ }
+        return disciplinaList;
     }
 
     public DisciplinaDTO update(DisciplinaDTO disciplinaDTO, Long id) {

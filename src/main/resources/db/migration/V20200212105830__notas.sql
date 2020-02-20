@@ -3,8 +3,9 @@ CREATE TABLE notas(
     aluno BIGINT NOT NULL,
     nota_um DECIMAL NOT NULL,
     nota_dois DECIMAL NOT NULL,
+    media DECIMAL(4,2) NOT NULL,
+    semestre VARCHAR NOT NULL,
     disciplina BIGINT NOT NULL,
-    media DECIMAL NOT NULL
 )
 
 ALTER TABLE notas

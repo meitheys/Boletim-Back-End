@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,14 @@ public class AlunoService {
         }
         throw new IllegalArgumentException(String.format("ID %s não existe", id));
     }
+
+                public List<Aluno> findAll(){
+                    List<Aluno> alunoList = new ArrayList<>();
+                    try{
+                    alunoList = this.alunoRepository.findAll();
+                    }catch (Exception e){ }
+                    return alunoList;
+                }
 
     public Aluno findByIdAluno(long id){
         Optional<Aluno> optional = this.alunoRepository.findById(id);

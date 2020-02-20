@@ -33,7 +33,8 @@ public class NotasService {
         notas.setDisciplina(disciplinaService.findById(notasDTO.getDisciplina()));
         notas.setPrimeiraNota(notasDTO.getPrimeiraNota());
         notas.setSegundaNota(notasDTO.getSegundaNota());
-        notas.setMedia(notasDTO.getPrimeiraNota() + notasDTO.getSegundaNota() / 2);
+        notas.setMedia((notasDTO.getPrimeiraNota() + notasDTO.getSegundaNota()) / 2);
+        notas.setSemestre(notasDTO.getSemestre());
         notas = this.notasRepository.save(notas);
 
 
@@ -57,6 +58,12 @@ public class NotasService {
         }
         if (StringUtils.isEmpty(notasDTO.getSegundaNota())) {
             throw new IllegalArgumentException("Nota 2 não deve ser nula");
+        }
+        if (StringUtils.isEmpty(notasDTO.getMedia())) {
+            throw new IllegalArgumentException("Média não deve ser nula");
+        }
+        if (StringUtils.isEmpty(notasDTO.getSemestre())) {
+            throw new IllegalArgumentException("Semestre não deve ser nulo");
         }
         if (notasDTO.getPrimeiraNota() > 10 || notasDTO.getPrimeiraNota() < 0){
             throw new IllegalArgumentException("Nota inválida");
@@ -89,7 +96,8 @@ public class NotasService {
             notasJaExiste.setDisciplina(disciplinaService.findById(notasDTO.getDisciplina()));
             notasJaExiste.setPrimeiraNota(notasDTO.getPrimeiraNota());
             notasJaExiste.setSegundaNota(notasDTO.getSegundaNota());
-            notasJaExiste.setMedia(notasDTO.getPrimeiraNota() + notasDTO.getSegundaNota() / 2);
+            notasJaExiste.setMedia((notasDTO.getPrimeiraNota() + notasDTO.getSegundaNota()) / 2);
+            notasJaExiste.setSemestre(notasDTO.getSemestre());
             notasJaExiste = this.notasRepository.save(notasJaExiste);
 
             return notasDTO.of(notasJaExiste);

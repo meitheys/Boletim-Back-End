@@ -19,6 +19,8 @@ public class Notas {
     private Double segundaNota;
     @Column(name = "media")
     private double media;
+    @Column(name = "semestre")
+    private String semestre;
     @ManyToOne
     @JoinColumn(name = "aluno", referencedColumnName = "id")
     private Aluno aluno;
@@ -58,6 +60,14 @@ public class Notas {
         this.media = media;
     }
 
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+
     public Aluno getAluno() {
         return aluno;
     }
@@ -81,6 +91,7 @@ public class Notas {
                 ", primeiraNota=" + primeiraNota +
                 ", segundaNota=" + segundaNota +
                 ", media=" + media +
+                ", semestre='" + semestre + '\'' +
                 ", aluno=" + aluno +
                 ", disciplina=" + disciplina +
                 '}';

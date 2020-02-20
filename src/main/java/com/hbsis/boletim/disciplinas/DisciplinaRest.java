@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/disciplinas")
 public class DisciplinaRest {
@@ -27,6 +30,12 @@ public class DisciplinaRest {
     public Disciplina find(@PathVariable("id") Long id) {
         LOGGER.info("Recebendo find by ID... id: [{}]", id);
         return this.disciplinaService.findById(id);
+    }
+
+    @GetMapping("/findDisciplinas")
+    public List<Disciplina> findAll() {
+        LOGGER.info("Listando Disciplinas");
+        return this.disciplinaService.findAll();
     }
 
     @PutMapping("/{id}")

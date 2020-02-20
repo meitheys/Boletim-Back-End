@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/alunos")
 public class AlunoRest {
     private static final Logger LOGGER = LoggerFactory.getLogger(AlunoRest.class);
     private AlunoService alunoService;
+    private AlunoRepository alunoRepository;
 
     @Autowired
     public AlunoRest(AlunoService alunoService) {
@@ -25,8 +28,14 @@ public class AlunoRest {
         return this.alunoService.save(alunoDTO);
     }
 
+    @GetMapping("/findAlunos")
+    public List<Aluno> findAll() {
+        LOGGER.info("Listando Alunos");
+        return this.alunoService.findAll();
+    }
+
     @GetMapping("/{id}")
-    public AlunoDTO findAlun(@PathVariable("id") Long id) {
+    public AlunoDTO findAlunos(@PathVariable("id") Long id) {
         LOGGER.info("Procurando com base em id: [{}]", id);
         return this.alunoService.findById(id);
     }
@@ -43,5 +52,4 @@ public class AlunoRest {
         LOGGER.info("Deletando aluno de ID: {}", id);
         this.alunoService.delete(id);
     }
-
 }
