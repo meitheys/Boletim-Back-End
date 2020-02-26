@@ -30,7 +30,7 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return "Disciplinas{" +
+        return "Disciplina{" +
                 "id=" + id +
                 ", disciplinas='" + disciplinas + '\'' +
                 '}';

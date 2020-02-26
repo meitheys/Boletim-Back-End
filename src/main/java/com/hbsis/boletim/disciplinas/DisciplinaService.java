@@ -23,8 +23,7 @@ public class DisciplinaService {
         LOGGER.debug("Disciplina: {}", disciplinaDTO);
 
         Disciplina disciplina = new Disciplina();
-        disciplina.setId(disciplinaDTO.getId());
-        disciplina.setDisciplinas(disciplinaDTO.getDisciplina());
+        disciplina.setDisciplinas(disciplinaDTO.getDisciplinas());
         disciplina = this.disciplinaRepository.save(disciplina);
 
         return DisciplinaDTO.of(disciplina);
@@ -57,7 +56,7 @@ public class DisciplinaService {
             LOGGER.debug("Payload: {}", disciplinaDTO);
 
             disciplina.setId(disciplinaDTO.getId());
-            disciplina.setDisciplinas(disciplinaDTO.getDisciplina());
+            disciplina.setDisciplinas(disciplinaDTO.getDisciplinas());
 
             disciplina = this.disciplinaRepository.save(disciplina);
 

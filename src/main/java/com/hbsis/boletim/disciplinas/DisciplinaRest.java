@@ -48,6 +48,6 @@ public class DisciplinaRest {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         LOGGER.info("Recebendo delete para a disciplina com id: {}", id);
-
+        this.disciplinaService.delete(id);
     }
 }

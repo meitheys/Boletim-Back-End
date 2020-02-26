@@ -1,5 +1,6 @@
 package com.hbsis.boletim.report;
 
+import com.hbsis.boletim.aluno.Aluno;
 import com.hbsis.boletim.aluno.AlunoRepository;
 import com.hbsis.boletim.aluno.AlunoService;
 import com.hbsis.boletim.notas.Notas;
@@ -20,12 +21,10 @@ public class ReportService {
 
     @Autowired
     private final AlunoService alunoService;
-    private final AlunoRepository alunoRepository;
     private final NotasRepository notasRepository;
 
-    public ReportService(AlunoService alunoService, AlunoRepository alunoRepository, NotasRepository notasRepository) {
+    public ReportService(AlunoService alunoService, NotasRepository notasRepository) {
         this.alunoService = alunoService;
-        this.alunoRepository = alunoRepository;
         this.notasRepository = notasRepository;
     }
 

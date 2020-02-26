@@ -5,9 +5,7 @@ import javax.validation.constraints.NotNull;
 public class DisciplinaDTO {
 
     private Long id;
-    @NotNull(message = "Disciplina cannot be null!")
     private String disciplinas;
-    @NotNull(message = "Not Nullable")
 
     public DisciplinaDTO() { }
 
@@ -31,19 +29,19 @@ public class DisciplinaDTO {
         this.id = id;
     }
 
-    public String getDisciplina() {
+    public String getDisciplinas() {
         return disciplinas;
     }
 
-    public void setDisciplina(String disciplina) {
-        this.disciplinas = disciplina;
+    public void setDisciplinas(String disciplinas) {
+        this.disciplinas = disciplinas;
     }
 
     @Override
     public String toString() {
         return "DisciplinaDTO{" +
                 "id=" + id +
-                ", disciplina='" + disciplinas + '\'' +
+                ", disciplinas='" + disciplinas + '\'' +
                 '}';
     }
 }
