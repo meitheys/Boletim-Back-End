@@ -47,7 +47,6 @@ public class TurmaService {
     private Turma fromDTO(TurmaDTO turmaDTO, Turma turma) {
         turma.setNumeroTurma(turmaDTO.getNumeroTurma());
         turma.setPeriodo(turmaDTO.getPeriodo());
-        turma.setDisciplina(turmaDTO.getDisciplina());
         return turma;
     }
 
@@ -93,6 +92,14 @@ public class TurmaService {
         }
     }
 
+    public List<Turma> findAll(){
+        List<Turma> turmaList = new ArrayList<>();
+        try{
+            turmaList = this.turmaRepository.findAll();
+        }catch (Exception e){ }
+        return turmaList;
+    }
+
     public TurmaDTO update(TurmaDTO turmaDTO, Long id) {
         this.validate(turmaDTO);
         Optional<Turma> turmaExistente = this.turmaRepository.findById(id);
@@ -104,7 +111,6 @@ public class TurmaService {
 
             turmaJaExiste.setNumeroTurma(turmaDTO.getNumeroTurma());
             turmaJaExiste.setPeriodo(turmaDTO.getPeriodo());
-            turmaJaExiste.setDisciplina(turmaDTO.getDisciplina());
             turmaJaExiste = this.turmaRepository.save(turmaJaExiste);
 
             return turmaDTO.of(turmaJaExiste);

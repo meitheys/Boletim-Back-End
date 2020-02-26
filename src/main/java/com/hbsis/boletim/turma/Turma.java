@@ -18,8 +18,6 @@ public class Turma implements Serializable {
     private String numeroTurma;
     @Column(name = "periodo")
     private String periodo;
-    @Column(name = "disciplina")
-    private String disciplina;
 
     /*
     @ManyToMany(targetEntity = Aluno.class)
@@ -55,21 +53,12 @@ public class Turma implements Serializable {
         this.periodo = periodo;
     }
 
-    public String getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(String disciplina) {
-        this.disciplina = disciplina;
-    }
-
     @Override
     public String toString() {
         return "Turma{" +
                 "id=" + id +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
-                ", disciplina='" + disciplina + '\'' +
                 '}';
     }
 }

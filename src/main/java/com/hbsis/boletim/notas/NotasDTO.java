@@ -1,31 +1,40 @@
 package com.hbsis.boletim.notas;
 
-import java.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class NotasDTO {
     private long id;
+    private double primeiraNota;
+    private double segundaNota;
+    private double media;
+    private String semestre;
     private long aluno;
-    private double nota;
-    private String disciplina;
-    private String trimestre;
+    private long disciplina;
 
     public NotasDTO() {
     }
 
-    public NotasDTO(long id, long aluno, double nota, String disciplina, String trimestre) {
+    @Autowired
+    public NotasDTO(long id, double primeiraNota, double segundaNota, double media, String semestre, long aluno, long disciplina) {
         this.id = id;
         this.aluno = aluno;
-        this.nota = nota;
-        this.trimestre = trimestre;
+        this.primeiraNota = primeiraNota;
+        this.segundaNota = segundaNota;
+        this.semestre = semestre;
+        this.media = media;
+        this.aluno = aluno;
+        this.disciplina = disciplina;
     }
 
     public static NotasDTO of(Notas notas) {
         return new NotasDTO(
                 notas.getId(),
+                notas.getPrimeiraNota(),
+                notas.getSegundaNota(),
+                notas.getMedia(),
+                notas.getSemestre(),
                 notas.getAluno().getId(),
-                notas.getNota(),
-                notas.getDisciplina(),
-                notas.getTrimestre()
+                notas.getDisciplina().getId()
         );
     }
 
@@ -37,6 +46,38 @@ public class NotasDTO {
         this.id = id;
     }
 
+    public double getPrimeiraNota() {
+        return primeiraNota;
+    }
+
+    public void setPrimeiraNota(double primeiraNota) {
+        this.primeiraNota = primeiraNota;
+    }
+
+    public double getSegundaNota() {
+        return segundaNota;
+    }
+
+    public void setSegundaNota(double segundaNota) {
+        this.segundaNota = segundaNota;
+    }
+
+    public double getMedia() {
+        return media;
+    }
+
+    public void setMedia(double media) {
+        this.media = media;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+
     public long getAluno() {
         return aluno;
     }
@@ -45,38 +86,24 @@ public class NotasDTO {
         this.aluno = aluno;
     }
 
-    public double getNota() {
-        return nota;
-    }
-
-    public void setNota(double nota) {
-        this.nota = nota;
-    }
-
-    public String getDisciplina() {
+    public long getDisciplina() {
         return disciplina;
     }
 
-    public void setDisciplina(String disciplina) {
+    public void setDisciplina(long disciplina) {
         this.disciplina = disciplina;
-    }
-
-    public String getTrimestre() {
-        return trimestre;
-    }
-
-    public void setTrimestre(String trimestre) {
-        this.trimestre = trimestre;
     }
 
     @Override
     public String toString() {
         return "NotasDTO{" +
                 "id=" + id +
+                ", primeiraNota=" + primeiraNota +
+                ", segundaNota=" + segundaNota +
+                ", media=" + media +
+                ", semestre='" + semestre + '\'' +
                 ", aluno=" + aluno +
-                ", nota=" + nota +
-                ", disciplina='" + disciplina + '\'' +
-                ", trimestre=" + trimestre +
+                ", disciplina=" + disciplina +
                 '}';
     }
 }

@@ -9,15 +9,13 @@ public class TurmaDTO {
     private long id;
     private String numeroTurma;
     private String periodo;
-    private String disciplina;
 
     public TurmaDTO(){}
 
-    public TurmaDTO(long id, String numeroTurma, String periodo, String disciplina) {
+    public TurmaDTO(long id, String numeroTurma, String periodo) {
         this.id = id;
         this.numeroTurma = numeroTurma;
         this.periodo = periodo;
-        this.disciplina = disciplina;
     }
 
     public static TurmaDTO of(Turma turma) {
@@ -31,8 +29,7 @@ public class TurmaDTO {
         return new TurmaDTO(
                 turma.getId(),
                 turma.getNumeroTurma(),
-                turma.getPeriodo(),
-                turma.getDisciplina()
+                turma.getPeriodo()
         );
     }
 
@@ -60,21 +57,12 @@ public class TurmaDTO {
         this.periodo = periodo;
     }
 
-    public String getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(String disciplina) {
-        this.disciplina = disciplina;
-    }
-
     @Override
     public String toString() {
         return "TurmaDTO{" +
                 "id=" + id +
                 ", numeroTurma='" + numeroTurma + '\'' +
                 ", periodo='" + periodo + '\'' +
-                ", disciplina='" + disciplina + '\'' +
                 '}';
     }
 }

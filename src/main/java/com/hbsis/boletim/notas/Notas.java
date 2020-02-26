@@ -1,6 +1,7 @@
 package com.hbsis.boletim.notas;
 
 import com.hbsis.boletim.aluno.Aluno;
+import com.hbsis.boletim.disciplinas.Disciplina;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,15 +13,20 @@ public class Notas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "nota")
-    private double nota;
+    @Column(name = "nota_um")
+    private Double primeiraNota;
+    @Column(name = "nota_dois")
+    private Double segundaNota;
+    @Column(name = "media")
+    private double media;
+    @Column(name = "semestre")
+    private String semestre;
     @ManyToOne
-    @JoinColumn(name = "aluno")
+    @JoinColumn(name = "aluno", referencedColumnName = "id")
     private Aluno aluno;
-    @Column(name = "disciplina")
-    private String disciplina;
-    @Column(name = "trimestre")
-    private String trimestre;
+    @ManyToOne
+    @JoinColumn(name = "disciplina", referencedColumnName = "id")
+    private Disciplina disciplina;
 
     public long getId() {
         return id;
@@ -30,12 +36,36 @@ public class Notas {
         this.id = id;
     }
 
-    public double getNota() {
-        return nota;
+    public Double getPrimeiraNota() {
+        return primeiraNota;
     }
 
-    public void setNota(double nota) {
-        this.nota = nota;
+    public void setPrimeiraNota(Double primeiraNota) {
+        this.primeiraNota = primeiraNota;
+    }
+
+    public Double getSegundaNota() {
+        return segundaNota;
+    }
+
+    public void setSegundaNota(Double segundaNota) {
+        this.segundaNota = segundaNota;
+    }
+
+    public double getMedia() {
+        return media;
+    }
+
+    public void setMedia(double media) {
+        this.media = media;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 
     public Aluno getAluno() {
@@ -46,30 +76,24 @@ public class Notas {
         this.aluno = aluno;
     }
 
-    public String getDisciplina() {
+    public Disciplina getDisciplina() {
         return disciplina;
     }
 
-    public void setDisciplina(String disciplina) {
+    public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
-    }
-
-    public String getTrimestre() {
-        return trimestre;
-    }
-
-    public void setTrimestre(String trimestre) {
-        this.trimestre = trimestre;
     }
 
     @Override
     public String toString() {
         return "Notas{" +
                 "id=" + id +
-                ", nota=" + nota +
+                ", primeiraNota=" + primeiraNota +
+                ", segundaNota=" + segundaNota +
+                ", media=" + media +
+                ", semestre='" + semestre + '\'' +
                 ", aluno=" + aluno +
-                ", disciplina='" + disciplina + '\'' +
-                ", trimestre=" + trimestre +
+                ", disciplina=" + disciplina +
                 '}';
     }
 }

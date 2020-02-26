@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/turma")
 public class TurmaRest {
@@ -24,6 +26,12 @@ public class TurmaRest {
         LOGGER.info("Salvando turma...");
         LOGGER.debug("Payload: {}", turmaDTO);
         return this.turmaService.save(turmaDTO);
+    }
+
+    @GetMapping("/findTurmas")
+    public List<Turma> findAll() {
+        LOGGER.info("Listando Turmas");
+        return this.turmaService.findAll();
     }
 
     @GetMapping("/{id}")
