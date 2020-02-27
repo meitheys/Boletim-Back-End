@@ -18,8 +18,8 @@ public class ReportRest {
         this.reportService = reportService;
     }
 
-    @GetMapping("/report/{format}/{id}")
-    public String gerarReport(@PathVariable(name = "format") String format, @PathVariable(name = "id") long id) throws FileNotFoundException, JRException {
-        return reportService.export(format, id);
+    @GetMapping("/report/{format}/{id}/{semestre}")
+    public String gerarReport(@PathVariable(name = "format") String format, @PathVariable(name = "id") long id, @PathVariable(name = "semestre") String semestre) throws FileNotFoundException, JRException {
+        return reportService.export(format, id, semestre);
     }
 }
