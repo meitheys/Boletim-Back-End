@@ -21,6 +21,9 @@
 	<field name="disciplina" class="java.lang.Object">
 		<property name="net.sf.jasperreports.javabean.field.property" value="disciplina.disciplinas"/>
 	</field>
+	<field name="semestre" class="java.lang.Object">
+		<property name="net.sf.jasperreports.javabean.field.property" value="semestre"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -74,6 +77,20 @@
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement style="Title" x="1" y="15" width="120" height="32" forecolor="#000000" uuid="a52c529d-8a21-4885-b4bd-8b2c9f9df422"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<text><![CDATA[Semestre]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" isPrintRepeatedValues="false" x="-20" y="47" width="160" height="40" uuid="f1c98342-0a43-4f15-8882-492734e9d058">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1bbaa0f1-20f9-4d33-af43-2adb4809acac"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{semestre}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -90,16 +107,14 @@
 					<reportElement style="Detail" isPrintRepeatedValues="false" x="0" y="-8" width="160" height="40" uuid="284bc88c-e68a-4d2f-b093-7924896580de">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1bbaa0f1-20f9-4d33-af43-2adb4809acac"/>
 					</reportElement>
-					<textElement textAlignment="Center">
-					</textElement>
+					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{nomeAluno}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement style="Detail" isPrintRepeatedValues="false" x="160" y="-5" width="160" height="34" uuid="284bc88c-e68a-4d2f-b093-7924896580de">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1bbaa0f1-20f9-4d33-af43-2adb4809acac"/>
 					</reportElement>
-					<textElement textAlignment="Center">
-					</textElement>
+					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{primeiraNota}]]></textFieldExpression>
 				</textField>
 				<textField>
@@ -126,51 +141,45 @@
 			</frame>
 		</band>
 	</detail>
-
-
-    <columnFooter>
-        <band height="6" splitType="Stretch">
-            <line>
-                <reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="fa5e88d5-a011-4e32-8f12-ce923f903111"/>
-                <graphicElement>
-                    <pen lineWidth="0.5" lineColor="#999999"/>
-                </graphicElement>
-            </line>
-        </band>
-    </columnFooter>
-
-
-    <pageFooter>
-        <band height="25" splitType="Stretch">
-            <frame>
-                <reportElement mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="5d8169bd-4a75-48c8-8a68-6d3ad5ba9402"/>
-                <textField evaluationTime="Report">
-                    <reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#000000" uuid="e5e27efa-b599-499b-9ca3-848cb511cb7b"/>
-                    <textElement verticalAlignment="Middle">
-                        <font size="10" isBold="false"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-                </textField>
-                <textField>
-                    <reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#000000" uuid="18cfe1ca-f7d6-48b0-9827-28578b42a5e0"/>
-                    <textElement textAlignment="Right" verticalAlignment="Middle">
-                        <font size="10" isBold="false"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-                </textField>
-                <textField pattern="EEEEE dd MMMMM yyyy">
-                    <reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#000000" uuid="fbce24bb-3cb1-44a3-8eec-8c067ddbe5b5"/>
-                    <textElement verticalAlignment="Middle">
-                        <font size="10" isBold="false"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-                </textField>
-            </frame>
-        </band>
-    </pageFooter>
-
-    <summary>
-        <band splitType="Stretch"/>
-    </summary>
-
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="fa5e88d5-a011-4e32-8f12-ce923f903111"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="5d8169bd-4a75-48c8-8a68-6d3ad5ba9402"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#000000" uuid="e5e27efa-b599-499b-9ca3-848cb511cb7b"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#000000" uuid="18cfe1ca-f7d6-48b0-9827-28578b42a5e0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#000000" uuid="fbce24bb-3cb1-44a3-8eec-8c067ddbe5b5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
 </jasperReport>
