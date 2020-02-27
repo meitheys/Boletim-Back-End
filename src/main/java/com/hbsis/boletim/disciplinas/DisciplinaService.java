@@ -1,5 +1,6 @@
 package com.hbsis.boletim.disciplinas;
 
+import com.hbsis.boletim.notas.NotasDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,17 @@ public class DisciplinaService {
         throw new IllegalArgumentException(String.format("ID %s não existe", id));
     }
 
+    public void validate(DisciplinaDTO disciplinaDTO) {
+        LOGGER.info("Validando disciplina...");
+
+        if (disciplinaDTO == null) {
+            throw new IllegalArgumentException("Disciplina vazia!");
+        }
+        if (disciplinaDTO.getDisciplinas() == null) {
+            throw new IllegalArgumentException("A disciplina não deve ser nula!");
+        }
+    }
+
     public List<Disciplina> findAll(){
         List<Disciplina> disciplinaList = new ArrayList<>();
         try{
@@ -67,7 +79,7 @@ public class DisciplinaService {
     }
 
     public void delete(Long id) {
-        LOGGER.info("Executando delete para usuário de ID: [{}]", id);
+        LOGGER.info("Executando delete para disciplina de ID: [{}]", id);
         this.disciplinaRepository.deleteById(id);
     }
 }

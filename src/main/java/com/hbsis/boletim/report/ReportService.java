@@ -28,20 +28,24 @@ public class ReportService {
         this.notasRepository = notasRepository;
     }
 
-    public String export(String response, long id) throws FileNotFoundException, JRException {
-        List<Notas> notas = notasRepository.findByAluno(alunoService.findByIdAluno(id));
+    public String export(String response, long id, String semestre) throws FileNotFoundException, JRException {
+        List<Notas> notas = notasRepository.findByAlunoAndSemestre(alunoService.findByIdAluno(id), semestre);
         String path = "C:\\Users\\matheus.furtado\\Desktop\\Reports";
         File file = ResourceUtils.getFile("classpath:boletim.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(notas);
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("createdBy", "Matheus");
+            String extensao = "";
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource);
             if(response.equalsIgnoreCase("html")){
-                JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "\\boletim" + id + ".html"); }
+                JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "\\boletim" + "Aluno" + id + "Semestre" + semestre + ".html");
+                extensao = "HTML";
+            }
             if (response.equalsIgnoreCase("pdf")){
-                JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\boletim" + id + ".pdf");
+                JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\boletim" + "Aluno" + id + "Semestre" + semestre + ".pdf");
+                extensao = "PDF";
         }
-        return "Gerado no caminho: " + path;
+        return "O " + extensao + " foi gerado no caminho: " + path;
     }
 }
